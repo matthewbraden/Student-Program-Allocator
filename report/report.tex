@@ -1,0 +1,129 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{paralist}
+\usepackage{listings}
+\usepackage{booktabs}
+
+\oddsidemargin 0mm
+\evensidemargin 0mm
+\textwidth 160mm
+\textheight 200mm
+
+\pagestyle {plain}
+\pagenumbering{arabic}
+
+\newcounter{stepnum}
+
+\title{Assignment 1 Solution}
+\author{Matthew Braden bradenm}
+\date{\today}
+
+\begin {document}
+
+\maketitle
+
+Before proceeding with the report, I just want to address a missed comment in the code for the file of 
+testCalc.py. There was meant to be a comment in that file showing the source of the Equal function;
+lines 8-12 were found from https://tinyurl.com/yavn3sao. As well as in CalcModule.py for the sorted algorithm; 
+line 10 was found from https://tinyurl.com/y9xdx4ep.
+
+\section{Indroduction}
+This assignment consisted of three modules, ReadAllocationData, CalcModule and testCalc. ReadAllocationData consisted of three functions; readStdnts which reads all the students data, including their macid, first name, last name, gender, gpa and three second year choices and creates a dictionary. ReadFreeChoice reads the students who have free choice. ReadDeptCapacity reads how many students can be allocated to each department and creates a dictionary with that information. CalcModule contains functions that returned the average of a certain gender, sorted the students in terms of gpa, and allocates the students for their choices. Finally testCalc involved testing each function in different ways.
+
+
+\section{Testing of the Original Program}
+For when it came to testing the original program, it was a priority to ensure that all the code modules were working and running with a 
+variety of different inputs. In order to use a variety of test cases, there was a decision to choose 10 different cases, 7 of which were used as Normal Test Cases. These test cases 
+ensure that all modules run smoothly no matter how many inputs used. The other 3 test cases used were
+Boundary Test Cases. During these tests, the goal is to try to use different inputs to crash the program to see what does and doesn't work.
+\newline
+
+The first Normal Test Case looked at was to test the sort function. This included an input of a dictionary of students in a random order of gpa. This test will sort the dictionary in order of highest gpa first to lowest gpa. The results for this test case went as expected, as the students were correctly sorted in order of highest to lowest gpa.
+The second Normal Test Case was for calculating the male students average gpa. A dictionary of students with random gpa and gender is included as the input. This will test the ability of the function to read and calculate the average of the gender inputed. The program correctly calculated the male students gpa, meaning the results were successful.
+The third, fourth and fifth Normal Test Cases were used to check the code for the ReadAllocationData files to ensure that the code works and runs efficiently. The outcome was a success as a list of students data, a list of free choice students and a list of the departments data were outputted for each function respectively.
+The sixth Normal Test Case involved trying to test for the average gpa of females, when all the inputs were male. This test will see if the program will know to output 0.0 as the correct output after reading that there are no females in the input. The program correctly outputted the float value of 0.0, thus passing the test.
+The seventh Normal Test Case includes a students dictionary, free choice students and the departments dictionary as inputs and tests the allocate function to see if each student should get into the correct program of their choice. There was a problem with my original code allocating students to more than one program and therefore the test case failed.
+\newline
+
+The first Boundary Test Case involved sorting students in decreasing order of gpa when two or more students have the exact same gpa. This test is to check what order the program will put the students in when two or more students has the same gpa. The students were allocated in correct order and when it came to the students with the same gpa the student who was first on the list got sorted first.
+The second Boundary Test Case involves calculating the female genders average gpa when the input used is spelt Female instead of female. This will test what the code will do when a student has an incorrect spelling in the gender category of their dictionary. This test ignored the student with the misspelling and ended up outputting an average gpa of 0.0 as expected.
+The third Boundary Test Case is to test what the program does with a student who does not have the minimum 4.0 gpa as it uses the inputs that includes the students dictionary, free choice students and the departments dictionary. The code recognized the student under the 4.0 gpa and did not allocate them. However the same problem occurred from the seventh Normal Test Case and allocated students to more than one program.
+\newline
+
+When testing my code, a few assumptions were made when deciding about what the programs inputs should be. For the inputs of the readStdnts function there was no need to include the part about saying what each item in the dictionary corresponds to. Other assumptions made include only using the students macid for the readFirstChoice input, the readDeptCapacity input will be in dictionary format, and the Sort function must contain the exact same inputs as the readStdnts function.
+
+
+\section{Results of Testing Partner's Code}
+
+The partners code was able to run with the same test cases that were used in the testCalc function, as both codes followed a very similar format when calling the items of the dictionary. The Normal Test Cases ran smoothly, the results of the test cases were correct as their program was able to achieve the correct outputs. For the Boundary Test Cases their code contained error traps, allowing the program to stop and raise an error for each test case when needed, causing the results of the original code against the partners to have different outputs on these Boundary Test Cases. The partners allocate function was also working unlike the original code allowing all test cases to execute correct outputs.
+
+\section{Discussion of Test Results}
+
+\subsection{Problems with Original Code}
+Through testing the original code, the testing brought up a few problems. One of these issues was with the allocate function. When this function runs it doesn't assign the students in the proper manner. This was due to the code not having the ability to break the for loop when it assigns the students to their selected programs.
+
+\subsection{Problems with Partner's Code}
+The only problems with the partners code was that they had error traps in it as mentioned above. This only caused a slight issue when testing as the expected results in the testCalc module had to be changed as the error traps will stop the code and get a different output when ran.
+
+\section{Critique of Design Specification}
+The Design Specification has certain areas that could be improved such as the exact format for the input of the readStdnts file. This caused some problems when starting the readStdnts function as the instructions were vague in what we did and didn't need when formatting the students dictionary. Other than that minor issue the rest of the Design Specification explained in great detail what each step must contain and the inputs used as mentioned above in the results of the code.  For next time consider changing the Design Specification in the manner of specifically stating what each input for each function should look like in order for there to be less ambiguity when creating the test cases inputs. This should therefore allow any students code to work in the same manner and not cause any problems when it comes to testing the partners code.
+
+%\newpage
+
+\section{Answers to Questions}
+
+\begin{enumerate}[(a)]
+
+\item The average function could be made more general by calculating the average for all students as well as the average for each gender. Sort can also be made to sort each gender in decending order of gpa instead of just the student population as a whole.
+
+\item Aliasing is when we have two variables that refer to the same dictionary object. This can be a concern with dictionaries as we would have to ensure that if two variables are for a similar object, we must make two objects in order to store the two variables.
+
+\item  For ReadAllocationData. The readStdnts function test cases would've included a file in dictionary format that includes, in order, each students macid, first name, last name, gender, gpa and choices. For readFreeChoice the test case would've included a file with a list of students that are in free choice from the readStdnts dictionary. Finally readDeptCapacity would've used a test case of a file with the departments and their capacity in a dictionary format.
+
+\item Strings are a case sensitive data type requiring the formatting of the strings to be correct in order to run the code properly. The use of sets would be a more accurate data type as they do not depend on upper or lower case formatting.
+
+\item Instead of using a dictionary we could also have implemented the records in a Custom Class format. Another way we could have done this is through the typing.namedTuple Class. If I were to change the data structure used in the code modules I would change it to a Custom Class format. This is because a Custom Class is able to store the records in a similar way a dictionary does, but in my opinion a Custom Class is easier to call and append the records at any time.
+
+\item If the list of strings for choices was changed to be a tuple instead, there will be no need for modifications in the CalcModule module as we would only be slicing a tuple to access a certain value as there is no need for tuple modifications. This is done in the exact format as a list. If a custom class for students was changed to a tuple, there would be a necessary modification to modify the CalcModule module as accessing a custom class is done differently than a list. This involves having to call different functions inside of the class.
+
+\end{enumerate}
+
+\newpage
+
+\lstset{language=Python, basicstyle=\tiny, breaklines=true, showspaces=false,
+  showstringspaces=false, breakatwhitespace=true}
+%\lstset{language=C,linewidth=.94\textwidth,xleftmargin=1.1cm}
+
+\def\thesection{\Alph{section}}
+
+\section{Code for ReadAllocationData.py}
+
+\noindent \lstinputlisting{../src/ReadAllocationData.py}
+
+\newpage
+
+\section{Code for CalcModule.py}
+
+\noindent \lstinputlisting{../src/CalcModule.py}
+
+\newpage
+
+\section{Code for testCalc.py}
+
+\noindent \lstinputlisting{../src/testCalc.py}
+
+\newpage
+
+\section{Code for Partner's CalcModule.py}
+
+\noindent \lstinputlisting{../partner/CalcModule.py}
+
+\newpage
+
+\section{Makefile}
+
+\lstset{language=make}
+\noindent \lstinputlisting{../Makefile}
+
+\end {document}
